@@ -114,8 +114,8 @@ public class BookMenu {
 			case 2 :
 				System.out.println("대출 건수가 많은 상위 5권의 목록입니다.");
 				bookList = bookController.searchBookWithRank();
-				for (int i = 0; i < 5; i++) {
-					System.out.println(bookList.get(i));
+				for (Book book : bookList) {
+					System.out.println(book);
 				}
 				break;
 			case 3: return;

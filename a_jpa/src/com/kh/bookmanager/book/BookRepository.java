@@ -3,6 +3,7 @@ package com.kh.bookmanager.book;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class BookRepository {
 
@@ -15,7 +16,9 @@ public class BookRepository {
 	}
 
 	public List<Book> findBookWithRank(EntityManager em) {
-		return em.createQuery("select b from Book b order by b.rentCnt desc", Book.class).getResultList();
+		TypedQuery<Book> query = em.createQuery("select b from Book b order by b.rentCnt desc", Book.class);
+		query.setMaxResults(5);
+		return query.getResultList();
 	}
 
 	
