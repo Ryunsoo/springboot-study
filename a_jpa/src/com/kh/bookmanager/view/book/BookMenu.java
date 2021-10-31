@@ -1,5 +1,6 @@
 package com.kh.bookmanager.view.book;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class BookMenu {
 	
 	private Scanner sc = new Scanner(System.in);
 	private BookController bookController = new BookController();
+	Long bkIdx = null;
 	
 	public void bookMenu() {
 		
@@ -37,22 +39,47 @@ public class BookMenu {
 				//bookController의 registBook 메서드를 호출해 도서정보를 추가
 				//도서가 성공적으로 추가되면 "도서 추가 성공"
 				//도서 추가에 실패하면 "도서 추가 실패" 출력
-				break;
+				if(bookController.registBook(registBook()) != 0) {
+					System.out.println("도서 등록이 완료되었습니다.");
+				}else {
+					System.out.println("도서 등록에 실패하였습니다.");
+				}
 				
+				break;
 			case 3:
 				//수정할 도서의 도서번호와 도서 소개(info컬럼)를 사용자로 부터 입력받아
 				//bookController 의 modifyBook을 호출해 도서 소개를 수정하고
 				//성공하면 "도서 수정 성공", 실패하면 "도서 수정 실패"를 출력하시오.
+				System.out.print("수정할 도서번호 : ");
+				bkIdx = sc.nextLong();
+				System.out.print("변경할 도서 소개 : ");
+				String info = sc.next();
 				
+				int modRes = bookController.modifyBook(bkIdx, info);
+				
+				if(modRes > 0) {
+					System.out.println("성공적으로 도서 소개가 변경되었습니다.");
+				}else if(modRes == 0) {
+					System.out.println("입력하신 도서번호가 존재하지 않아 실패하였습니다.");
+				}else {
+					System.out.println("소개 변경 중 에러가 발생하였습니다.");
+				}
 				break;
-				
 			case 4:
 				//삭제할 도서의 도서번호를 사용자로 부터 입력받아
 				//bookController 의 deleteBook 메서드를 호출하고
 				//도서 삭제에 성공하면 "도서 삭제 성공", 실패하면 "도서 삭제 실패" 출력
-				
+				System.out.print("삭제할 도서번호 : ");
+				bkIdx = sc.nextLong();
+				int delRes = bookController.removeBook(bkIdx);
+				if(delRes > 0) {
+					System.out.println("성공적으로 도서가 삭제되었습니다.");
+				}else if(delRes == 0) {
+					System.out.println("입력하신 도서번호가 존재하지 않아 실패하였습니다.");
+				}else {
+					System.out.println("도서 삭제 중 에러가 발생하였습니다.");
+				}
 				break;
-				
 			//searchBookMenu 메서드를 호출해 도서 검색 메뉴창 출력
 			case 5: searchBookMenu(); break;		
 			case 6: return;
@@ -76,6 +103,10 @@ public class BookMenu {
 				//도서명을 전달하고 결과를 출력하시오.	
 				System.out.print("검색할 키워드를 입력하세요 : ");
 				bookList = bookController.searchBookByTitle(sc.next());
+				if(bookList.isEmpty()) {
+					System.out.println("입력하신 키워드가 포함된 도서가 없습니다.");
+					break;
+				}
 				for (Book book : bookList) {
 					System.out.println(book);
 				}
@@ -83,8 +114,8 @@ public class BookMenu {
 			case 2 :
 				System.out.println("대출 건수가 많은 상위 5권의 목록입니다.");
 				bookList = bookController.searchBookWithRank();
-				for (Book book : bookList) {
-					System.out.println(book);
+				for (int i = 0; i < 5; i++) {
+					System.out.println(bookList.get(i));
 				}
 				break;
 			case 3: return;
@@ -103,7 +134,7 @@ public class BookMenu {
 		System.out.print("작가 : " );
 		book.setAuthor(sc.next());
 		
-		System.out.print("ISBN");
+		System.out.print("ISBN : ");
 		book.setIsbn(sc.next());
 		
 		System.out.print("카테고리코드 : ");

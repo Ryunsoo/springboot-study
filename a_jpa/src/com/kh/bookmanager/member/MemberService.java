@@ -64,7 +64,6 @@ public class MemberService {
 		
 		try {
 			em.persist(member);
-			//em.flush();
 			tx.commit();
 			res = 1;
 		} catch (Exception e) {
