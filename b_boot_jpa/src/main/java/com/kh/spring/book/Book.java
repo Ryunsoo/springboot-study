@@ -1,4 +1,4 @@
-package com.kh.bookmanager.book;
+package com.kh.spring.book;
 
 import java.time.LocalDateTime;
 

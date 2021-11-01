@@ -1,4 +1,4 @@
-package com.kh.bookmanager.rent;
+package com.kh.spring.rent;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.kh.bookmanager.book.Book;
+import com.kh.spring.book.Book;
 
 import lombok.Data;
 import lombok.ToString;

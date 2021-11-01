@@ -52,8 +52,9 @@ public class BookMenu {
 				//성공하면 "도서 수정 성공", 실패하면 "도서 수정 실패"를 출력하시오.
 				System.out.print("수정할 도서번호 : ");
 				bkIdx = sc.nextLong();
+				sc.nextLine();
 				System.out.print("변경할 도서 소개 : ");
-				String info = sc.next();
+				String info = sc.nextLine();
 				
 				int modRes = bookController.modifyBook(bkIdx, info);
 				

@@ -6,12 +6,20 @@ public class RentController {
 	
 	private RentService rentService = new RentService();
 	
-	public boolean registRent(String userId, List<String> bkIdxs) {
-		return rentService.insertRentInfo(userId, bkIdxs);
+	public boolean registRent(String userId, List<Long> bkIdxs) {
+		return rentService.persistRentInfo(userId, bkIdxs);
 	}
 
-	public void returnBook(String rbIdx) {
+	public void returnBook(Long rbIdx) {
 		rentService.returnBook(rbIdx);
+	}
+
+	public void extendsBook(Long rbIdx) {
+		rentService.extendsBook(rbIdx);
+	}
+
+	public List<Rent> findAllRentByUserId(String userId) {
+		return rentService.findAllRentByUserId(userId);
 	}
 	
 	

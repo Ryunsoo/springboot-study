@@ -12,7 +12,9 @@ public class BookRepository {
 	}
 
 	public List<Book> findBookByTitle(EntityManager em, String keyword) {
-		return em.createQuery("select b from Book b where b.title like '%" + keyword + "%'", Book.class).getResultList();
+		return em.createQuery("select b from Book b where b.title like '%'||:keyword||'%'", Book.class)
+				.setParameter("keyword", keyword)
+				.getResultList();
 	}
 
 	public List<Book> findBookWithRank(EntityManager em) {

@@ -1,4 +1,4 @@
-package com.kh.bookmanager.rent;
+package com.kh.spring.rent;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.kh.bookmanager.member.Member;
+import com.kh.spring.member.Member;
 
 import lombok.Data;
 
