@@ -43,7 +43,7 @@ public class Rent {
 	// ALL : PERSIST + REMOVE + MERGE + DETACH
 	
 	//FetchType.EAGER : Lazy Initialization 설정을 끔
-	@OneToMany(mappedBy = "rent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "rent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<RentBook> rentBooks = new ArrayList<RentBook>();
 	
 	@Column(columnDefinition = "date default sysdate")
