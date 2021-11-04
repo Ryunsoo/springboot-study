@@ -2,15 +2,11 @@ package com.kh.toy.board;
 
 import java.util.List;
 
-import com.kh.toy.common.util.file.FileDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BoardRepository {
+import com.kh.toy.common.util.file.FileInfo;
 
-	void insertFileInfo(FileDTO fileDTO);
+public interface BoardRepository extends JpaRepository<Board, Long>{
+
 	
-	void insertBoard(Board board);
-
-	Board selectBoardIdx(String bdIdx);
-	
-	List<FileDTO> selectFilesByBdIdx(String bdIdx);
 }

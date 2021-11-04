@@ -31,9 +31,7 @@ public class JoinFormValidator implements Validator{
 		JoinForm form = (JoinForm) target;
 		
 		//1. 아이디 존재 유뮤
-		if(memberRepository.selectMemberByUserId(form.getUserId()) != null) {
-			errors.rejectValue("userId", "error-userId", "이미 존재하는 아이디입니다.");
-		}
+		
 		
 		//2. 비밀번호가 8글자 이상, 숫자 영문자 특수문자 조합인지 확인
 		boolean valid = Pattern.matches("(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Zㄱ-힣0-9]).{8,}", form.getPassword());

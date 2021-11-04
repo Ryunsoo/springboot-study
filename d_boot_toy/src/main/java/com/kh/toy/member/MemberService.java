@@ -9,7 +9,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.kh.toy.common.code.Config;
-import com.kh.toy.common.mail.MailSender;
+import com.kh.toy.common.mail.EmailSender;
 import com.kh.toy.member.Member;
 import com.kh.toy.member.MemberRepository;
 import com.kh.toy.member.validator.JoinForm;
@@ -21,26 +21,19 @@ import lombok.RequiredArgsConstructor;
 public class MemberService{
 
 	private final MemberRepository memberRepository;
-	private final MailSender mailSender;
+	private final EmailSender mailSender;
 	private final RestTemplate http;
 	private final PasswordEncoder passwordEncoder;
 	
 	public void insertMember(JoinForm form) {
-		form.setPassword(passwordEncoder.encode(form.getPassword()));
-		memberRepository.insertMember(form);
 	}
 
 	public Member authenticateUser(Member member) {
-		Member storedMember = memberRepository.selectMemberByUserId(member.getUserId());
-		if(storedMember != null && passwordEncoder.matches(member.getPassword(), storedMember.getPassword())) {
-			return storedMember;
-		}
-		
 		return null;
 	}
 
 	public Member selectMemberByUserId(String userId) {
-		return memberRepository.selectMemberByUserId(userId);
+		return null;
 	}
 
 	public void authenticateByEmail(JoinForm form, String token) {

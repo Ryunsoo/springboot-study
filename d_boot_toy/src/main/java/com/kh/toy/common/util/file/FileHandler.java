@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FileHandler {
 
 	@GetMapping("/download")
-	public ResponseEntity<UrlResource> downloadFile(FileDTO file) throws URISyntaxException, IOException {
+	public ResponseEntity<UrlResource> downloadFile(FileInfo file) throws URISyntaxException, IOException {
 		
 		UrlResource resource = new UrlResource(new URI(file.getLink()));
 		

@@ -41,7 +41,7 @@ public class BoardController {
 		logger.debug("files.0 : " + files.get(0));
 		logger.debug("mf.isEmpty : " + files.get(0).isEmpty());
 		
-		board.setUserId(member.getUserId());
+		board.setMember(member);
 		boardservice.insertBoard(files, board);
 		
 		return "redirect:/";

@@ -13,11 +13,11 @@ import com.kh.toy.common.code.ErrorCode;
 import com.kh.toy.common.exception.HandlableException;
 
 @Component
-public class MailSender {
+public class EmailSender {
 
 	JavaMailSender mailSender;
 	
-	public MailSender(JavaMailSender mailSender) {
+	public EmailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 	

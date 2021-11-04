@@ -23,8 +23,10 @@ public class AdminMemberController {
 	
 	@GetMapping("member/member-list")
 	public void searchAllMembers(Model model) { //Model 매개변수는 스프링으로부터 주입받는다.
+		
 		List<Member> members = adminMemberService.selectAllMembers();
 		logger.debug(members.toString());
 		model.addAttribute("members", members);
+		 
 	}
 }

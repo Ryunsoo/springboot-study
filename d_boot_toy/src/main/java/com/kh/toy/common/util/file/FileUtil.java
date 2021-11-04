@@ -13,17 +13,17 @@ import com.kh.toy.common.exception.HandlableException;
 
 public class FileUtil {
 
-	public FileDTO fileUpload(MultipartFile file) {
-		FileDTO fileDTO = null;
+	public FileInfo fileUpload(MultipartFile file) {
+		FileInfo fileInfo = null;
 		try {
 			String uploadPath = createUploadPath(createSubPath());
-			fileDTO = createFileDTO(file);
-			File dest = new File(uploadPath + fileDTO.getRenameFileName());
+			fileInfo = createFileInfo(file);
+			File dest = new File(uploadPath + fileInfo.getRenameFileName());
 			file.transferTo(dest);
 		} catch (IllegalStateException | IOException e) {
 			throw new HandlableException(ErrorCode.FAILED_FILE_UPLOAD_ERROR);
 		}
-		return fileDTO;
+		return fileInfo;
 	}
 	
 	private String createSubPath() {
@@ -46,7 +46,7 @@ public class FileUtil {
 		return uploadPath;
 	}
 	
-	private FileDTO createFileDTO(MultipartFile filePart) {
+	private FileInfo createFileInfo(MultipartFile filePart) {
 		String renameFileName = UUID.randomUUID().toString();
 		String originFileName = filePart.getOriginalFilename();
 		
@@ -55,11 +55,11 @@ public class FileUtil {
 		}
 		String savePath = createSubPath();
 		
-		FileDTO fileDTO = new FileDTO();
-		fileDTO.setOriginFileName(originFileName);
-		fileDTO.setRenameFileName(renameFileName);
-		fileDTO.setSavePath(savePath);
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setOriginFileName(originFileName);
+		fileInfo.setRenameFileName(renameFileName);
+		fileInfo.setSavePath(savePath);
 		
-		return fileDTO;
+		return fileInfo;
 	}
 }

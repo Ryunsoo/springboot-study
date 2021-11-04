@@ -12,9 +12,10 @@ public class AdminMemberService {
 
 	@Autowired
 	private AdminMemberRepository adminMemberRepository;
-	
+
 	public List<Member> selectAllMembers() {
-		return adminMemberRepository.selectAllMembers();
+		return null;
 	}
+	
 	
 }
