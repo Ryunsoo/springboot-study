@@ -42,17 +42,23 @@ public class BoardController {
 		logger.debug("mf.isEmpty : " + files.get(0).isEmpty());
 		
 		board.setMember(member);
-		boardservice.insertBoard(files, board);
+		boardservice.persistBoard(files, board);
 		
 		return "redirect:/";
 	}
 	
 	@GetMapping("board-detail")
-	public void boardDetail(Model model, String bdIdx) {
-		Map<String, Object> commandMap = boardservice.selectBoardByIdx(bdIdx);
-		model.addAllAttributes(commandMap);
+	public void boardDetail(Model model, Long bdIdx) {
+		Board board = boardservice.findBoardById(bdIdx);
+		model.addAttribute("board", board);
 	}
 	
-	
+	@GetMapping("board-list")
+	public void boardList(Model model
+						, @RequestParam(required = false, defaultValue = "1") int page) {
+		
+		List<Board> boardList = boardservice.findBoardsByPage(page);
+		model.addAttribute(boardList);
+	}
 	
 }

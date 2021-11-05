@@ -19,6 +19,7 @@
 				if(!response.ok) throw new Error(`${response.statusText} : ${response.status}`);
 				return response.text();
 			}).then(text => {
+				console.dir(text);
 				if(text == 'available') {
 					document.querySelector('#idCheck').innerHTML = '사용 가능한 아이디 입니다.';
 					confirmId = id;

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
-<th:block th:replace="fragments :: flg_head"></th:block>
+<th:block th:replace="~{fragments :: frg_head}"></th:block>
 <style type="text/css">
 	.valid-msg{color:red; font-size:0.5vw;}
 </style>
@@ -18,7 +18,7 @@
 </th:block>
 
 <th:block th:unless="${session.authentication == null}">
-	<h1>${authentication.userId}님 안녕?</h1>
+	<h1>[[${session.authentication.userId}]]님 안녕?</h1>
 	<h2><a href="/member/logout">logout</a></h2>
 	<h2><a href="/member/mypage">마이페이지</a></h2>
 	<h2><a href="/board/board-form">게시글 작성</a></h2>

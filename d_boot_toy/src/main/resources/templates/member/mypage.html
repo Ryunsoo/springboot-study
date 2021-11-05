@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<th:block th:replace="fragments :: flg_head"></th:block>
+<th:block th:replace="fragments :: frg_head"></th:block>
 </head>
 <body>
 	<h1>마이페이지</h1>
-	<table border="1" th:object="${session.authentication">
+	<table border="1" th:object="${session.authentication}">
 		<tr>
 			<th>아이디</th>
 			<td th:text="*{userId}"></td>

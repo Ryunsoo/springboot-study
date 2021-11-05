@@ -77,7 +77,7 @@ public class MemberController {
 	
 	@GetMapping("join")
 	public void joinForm(Model model) {
-		model.addAttribute(new JoinForm()).addAttribute("error", new ValidateResult().getError());
+		model.addAttribute(new JoinForm());
 	}
 	
 	@PostMapping("join")
@@ -88,12 +88,7 @@ public class MemberController {
 			RedirectAttributes redirectAttr
 			) {
 		
-		ValidateResult vr = new ValidateResult();
-		//validator에서 발생한 오류가 없어도 model에 넣어주어야 추후 템플릿 교체 후 오류가 발생하지 않는다.
-		model.addAttribute("error", vr.getError());
-		
 		if(errors.hasErrors()) {
-			vr.addError(errors);
 			return "member/join";
 		}
 		
@@ -119,7 +114,7 @@ public class MemberController {
 			throw new HandlableException(ErrorCode.AUTHENTICATION_FAILED_ERROR);
 		}
 		
-		memberService.insertMember(form);
+		memberService.persistMember(form);
 		redirectAttrs.addFlashAttribute("message", "회원가입을 환영합니다. 로그인 해주세요.");
 		session.removeAttribute("persistToken");
 		session.removeAttribute("persistUser");
@@ -176,13 +171,17 @@ public class MemberController {
 	@ResponseBody	//@ResponseBody가 없을 때 반환값은 포워드 경로
 	//@ResponseBody일 때 자바 빈 규약을 지킨 객체(ex_Member)를 반환할 시에, 자동으로 Json 객체로 변환해서 응답해준다.
 	public String idCheck(String userId) {
-		Member member = memberService.selectMemberByUserId(userId);
-		
-		if(member == null) {
+		if(!memberService.existMemberById(userId)) {
 			return "available";
 		}else {
 			return "disable";
 		}
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("authentication");
+		return "redirect:/";
 	}
 	
 	
